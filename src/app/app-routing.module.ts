@@ -4,10 +4,11 @@ import { RouterModule, Routes } from '@angular/router';
 import { SigninComponent } from './features/signin/signin.component';
 
 const routes: Routes = [
-  { path: '', pathMatch: 'full', redirectTo: 'signin' },
+  { path: '', pathMatch: 'full', redirectTo: 'books' },
   { path: 'signin', loadChildren: () => import('./features/signin/signin.module')
     .then(m => m.SigninModule) },
-  { path: 'books', loadChildren: () => import('./features/books/books.module').then(m => m.BooksModule) },
+  { path: 'books', loadChildren: () => import('./features/books/books.module')
+    .then(m => m.BooksModule) },
 ];
 
 @NgModule({
