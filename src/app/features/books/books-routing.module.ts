@@ -1,8 +1,10 @@
+import { BookCreateComponent } from './components/book-create/book-create.component';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { BooksComponent } from './components/books.component';
 
-const routes: Routes = [];
+const routes: Routes = [
+  {path: 'create', component: BookCreateComponent}
+];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],
