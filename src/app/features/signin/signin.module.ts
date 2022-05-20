@@ -12,13 +12,11 @@ import { SharedModule } from 'src/app/shared/shared.module';
     SigninComponent
   ],
   imports: [
-    CommonModule,
     SigninRoutingModule,
     SharedModule,
-    AngularMaterialModule
   ],
   exports: [
-    SigninComponent
+
   ]
 })
 export class SigninModule { }

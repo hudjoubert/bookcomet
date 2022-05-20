@@ -15,6 +15,7 @@ export class SigninComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  login(){}
 
   getErrorMessage() {
     if (this.email.hasError('required')) {
