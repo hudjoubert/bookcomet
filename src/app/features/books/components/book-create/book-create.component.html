@@ -9,10 +9,15 @@
       <mat-label>Year</mat-label>
       <input matInput [(ngModel)]="book.year" name="year">
     </mat-form-field>
-    <mat-form-field appearance="fill">
-      <mat-label>Authors</mat-label>
-      <input matInput [(ngModel)]="book.authors" name="authors">
-    </mat-form-field>
+    <div fxLayout="row" fxLayoutAlign="space-around center" >
+      <mat-form-field appearance="fill">
+        <mat-label>Authors</mat-label>
+        <input matInput [(ngModel)]="book.authors" name="authors">
+      </mat-form-field>
+      <button mat-mini-fab color="primary" (click)="addAuthors()">
+        <mat-icon>add</mat-icon>
+      </button>
+    </div>
     <mat-form-field appearance="fill">
       <mat-label>Summary</mat-label>
       <textarea matInput [(ngModel)]="book.summary" name="summary"></textarea>

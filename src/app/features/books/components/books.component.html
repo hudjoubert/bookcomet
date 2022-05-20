@@ -1,7 +1,11 @@
 <app-header></app-header>
-<button mat-raised-button color="primary" (click)="openDialogCreateBook()">
-  Add new book
-  <mat-icon>add</mat-icon>
-</button>
-<app-list-books></app-list-books>
+<div class="spacer" fxLayout="row" fxLayoutAlign="center center">
+  <button mat-raised-button color="primary" (click)="openDialogCreateBook()">
+    Add new book
+    <mat-icon>add</mat-icon>
+  </button>
+</div>
+<div class="table-container">
+  <app-list-books></app-list-books>
+</div>
 

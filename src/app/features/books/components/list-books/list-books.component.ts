@@ -1,47 +1,55 @@
+import { SharedService } from './../../../../shared/services/shared.service';
 import { BookOut } from './../../../../core/models/book-out';
 import { BooksService } from './../../services/books.service';
-import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
-
-export interface PeriodicElement {
-  name: string;
-  position: number;
-  weight: number;
-  symbol: string;
-}
-
-const ELEMENT_DATA: PeriodicElement[] = [
-  {position: 1, name: 'Hydrogen', weight: 1.0079, symbol: 'H'},
-  {position: 2, name: 'Helium', weight: 4.0026, symbol: 'He'},
-  {position: 3, name: 'Lithium', weight: 6.941, symbol: 'Li'},
-  {position: 4, name: 'Beryllium', weight: 9.0122, symbol: 'Be'},
-  {position: 5, name: 'Boron', weight: 10.811, symbol: 'B'},
-  {position: 6, name: 'Carbon', weight: 12.0107, symbol: 'C'},
-  {position: 7, name: 'Nitrogen', weight: 14.0067, symbol: 'N'},
-  {position: 8, name: 'Oxygen', weight: 15.9994, symbol: 'O'},
-  {position: 9, name: 'Fluorine', weight: 18.9984, symbol: 'F'},
-  {position: 10, name: 'Neon', weight: 20.1797, symbol: 'Ne'},
-];
+import { Component, OnInit, ChangeDetectionStrategy, AfterViewInit, ViewChild, NgZone, ChangeDetectorRef } from '@angular/core';
+import { MatPaginator } from '@angular/material/paginator';
+import { BookCreateComponent } from '../book-create/book-create.component';
+import { MatDialog } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-list-books',
   templateUrl: './list-books.component.html',
   styleUrls: ['./list-books.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.Default
 })
 export class ListBooksComponent implements OnInit {
 
-  displayedColumns: string[] = ['name', 'year', 'authors'];
-  // dataSource = ELEMENT_DATA;
-  dataSource!: BookOut[];
+  displayedColumns: string[] = ['name', 'year', 'authors', 'actions'];
+  dataSource?: BookOut[];
+  resultsLength = 0;
+  isLoadingResults = true;
+  isRateLimitReached = false;
 
-  constructor(private booksService: BooksService) { }
+  @ViewChild(MatPaginator) paginator!: MatPaginator;
+
+  constructor(
+    public dialog: MatDialog,
+    private changeDetectorRefs: ChangeDetectorRef,
+    private booksService: BooksService,
+    private sharedService: SharedService) { }
 
   ngOnInit(): void {
-    this.booksService.getAllBooks().subscribe(books => {
-      console.log(books);
+    this.getAllBooks();
+  }
 
-      this.dataSource = books
+  openDialogEditBook(id: number) {
+    const dialogRef = this.dialog.open(BookCreateComponent, {
+      width: '40%',
+      data: {id: id}
+    });
+  }
+
+  deleteBook(id: number) {
+    this.booksService.deleteBook(id).subscribe(()=>{
+      this.sharedService.showMessage('Book deleted with success');
     })
   }
 
+  getAllBooks() {
+    this.booksService.getAllBooks().subscribe(books => {
+      this.dataSource = books
+      this.resultsLength = books.length
+      this.changeDetectorRefs.detectChanges();
+    })
+  }
 }
