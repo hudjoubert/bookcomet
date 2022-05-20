@@ -1,7 +1,7 @@
-export class BookOut {
-  id!: number;
-  name!: String;
-  year!: number;
-  authors!: String[];
-  summary!: String;
+export interface BookOut {
+  id: number;
+  name: String;
+  year: number;
+  authors: String[];
+  summary: String;
 }

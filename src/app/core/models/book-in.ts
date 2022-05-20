@@ -1,7 +1,7 @@
-export class BookIn {
-  name!: String;
-  year!: number;
-  authors!: String[];
-  summary!: String;
+export interface BookIn {
+  name: String;
+  year: number;
+  authors: String[];
+  summary: String;
 }
 
