@@ -1,4 +1,6 @@
+import { BookCreateComponent } from './book-create/book-create.component';
 import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
+import {MatDialog} from '@angular/material/dialog';
 
 @Component({
   selector: 'app-books',
@@ -8,9 +10,13 @@ import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 })
 export class BooksComponent implements OnInit {
 
-  constructor() { }
+  constructor(public dialog: MatDialog) { }
 
   ngOnInit(): void {
+
   }
 
+  openDialogCreateBook() {
+    const dialogRef = this.dialog.open(BookCreateComponent);
+  }
 }
