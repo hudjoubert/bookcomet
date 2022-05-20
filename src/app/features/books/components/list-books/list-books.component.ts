@@ -1,3 +1,5 @@
+import { BookOut } from './../../../../core/models/book-out';
+import { BooksService } from './../../services/books.service';
 import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 
 export interface PeriodicElement {
@@ -28,12 +30,18 @@ const ELEMENT_DATA: PeriodicElement[] = [
 })
 export class ListBooksComponent implements OnInit {
 
-  displayedColumns: string[] = ['position', 'name', 'weight', 'symbol'];
-  dataSource = ELEMENT_DATA;
+  displayedColumns: string[] = ['name', 'year', 'authors'];
+  // dataSource = ELEMENT_DATA;
+  dataSource!: BookOut[];
 
-  constructor() { }
+  constructor(private booksService: BooksService) { }
 
   ngOnInit(): void {
+    this.booksService.getAllBooks().subscribe(books => {
+      console.log(books);
+
+      this.dataSource = books
+    })
   }
 
 }
