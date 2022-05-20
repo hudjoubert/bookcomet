@@ -6,6 +6,7 @@ import { AngularMaterialModule } from './angular-material.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { HeaderModule } from './header/header.module';
+import { HttpClientModule } from '@angular/common/http';
 
 
 @NgModule({
@@ -17,7 +18,8 @@ import { HeaderModule } from './header/header.module';
     FormsModule,
     ReactiveFormsModule,
     FlexLayoutModule,
-    HeaderModule
+    HeaderModule,
+    HttpClientModule,
   ],
   exports: [
     CommonModule,
