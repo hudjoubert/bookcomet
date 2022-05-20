@@ -1,6 +1,27 @@
 <h1 mat-dialog-title>Create new Book</h1>
-<div mat-dialog-content>This dialog showcases the title, close, content and actions elements.</div>
+<div mat-dialog-content>
+  <form>
+    <mat-form-field appearance="fill">
+      <mat-label>Name of book</mat-label>
+      <input matInput [(ngModel)]="book.name" name="name">
+    </mat-form-field>
+    <mat-form-field appearance="fill">
+      <mat-label>Year</mat-label>
+      <input matInput [(ngModel)]="book.year" name="year">
+    </mat-form-field>
+    <mat-form-field appearance="fill">
+      <mat-label>Authors</mat-label>
+      <input matInput [(ngModel)]="book.authors" name="authors">
+    </mat-form-field>
+    <mat-form-field appearance="fill">
+      <mat-label>Summary</mat-label>
+      <textarea matInput [(ngModel)]="book.summary" name="summary"></textarea>
+    </mat-form-field>
+  </form>
+
+</div>
 <div mat-dialog-actions>
-  <button mat-button mat-raised-button color="primary" mat-dialog-close cdkFocusInitial>Save</button>
+  <button mat-button mat-raised-button color="primary"
+   mat-dialog-close cdkFocusInitial (click)="addNewBook()">Save</button>
   <button mat-button mat-dialog-close>Close</button>
 </div>
